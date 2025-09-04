@@ -1,4 +1,5 @@
-import { Item, GildedRose } from '@/gilded-rose';
+import { GildedRose } from '@/gilded-rose';
+import { Item } from "@/item";
 
 const BACKSTAGE = 'Backstage passes to a TAFKAL80ETC concert';
 const BRIE = 'Aged Brie';
