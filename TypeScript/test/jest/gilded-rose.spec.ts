@@ -1,5 +1,5 @@
 import { GildedRose } from '@/gilded-rose';
-import { Item } from "@/item";
+import { Item } from "@/domain/Item";
 
 const BACKSTAGE = 'Backstage passes to a TAFKAL80ETC concert';
 const BRIE = 'Aged Brie';

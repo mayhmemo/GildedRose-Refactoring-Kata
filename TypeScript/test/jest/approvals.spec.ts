@@ -1,5 +1,5 @@
 import { GildedRose } from '@/gilded-rose';
-import { Item } from "@/item";
+import { Item } from "@/domain/Item";
 
 /**
  * This unit test uses [Jest Snapshot](https://goo.gl/fbAQLP).
