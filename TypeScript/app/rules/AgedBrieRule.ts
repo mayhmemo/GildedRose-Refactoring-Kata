@@ -3,18 +3,16 @@ import { Item } from "@/domain/Item";
 
 export class AgedBrieRule implements IUpdateRule {
   update(item: Item) {
-    let finalQuality: number;
+    this.increaseQuality(item, 1);
 
-    if (item.sellIn > 0) {
-      finalQuality = item.quality + 1;
+    item.sellIn -= 1;
 
-      item.quality = finalQuality > 50 ? 50 : finalQuality;
-    } else {
-      finalQuality = item.quality + 2;
-
-      item.quality = finalQuality > 50 ? 50 : finalQuality;
+    if (item.sellIn < 0) {
+      this.increaseQuality(item, 1);
     }
+  }
 
-    item.sellIn = item.sellIn - 1;
+  private increaseQuality(item: Item, amount: number) {
+    item.quality = Math.min(50, item.quality + amount);
   }
 }

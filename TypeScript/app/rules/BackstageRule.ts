@@ -3,26 +3,23 @@ import { Item } from "@/domain/Item";
 
 export class BackstageRule implements IUpdateRule {
   update(item: Item) {
-    if (item.sellIn > 0) {
-      let finalQuality: number;
+    this.increaseQuality(item, 1);
 
-      if (item.sellIn > 10) {
-        finalQuality = item.quality + 1;
-
-        item.quality = finalQuality > 50 ? 50 : finalQuality;
-      } else if (item.sellIn > 5 && item.sellIn <= 10) {
-        finalQuality = item.quality + 2;
-
-        item.quality = finalQuality > 50 ? 50 : finalQuality;
-      } else if (item.sellIn <= 5 && item.sellIn >= 1) {
-        finalQuality = item.quality + 3;
-
-        item.quality = finalQuality > 50 ? 50 : finalQuality;
-      }
-    } else {
-      item.quality = 0;
+    if (item.sellIn <= 10) {
+      this.increaseQuality(item, 1);
+    }
+    if (item.sellIn <= 5) {
+      this.increaseQuality(item, 1);
     }
 
-    item.sellIn = item.sellIn - 1;
+    item.sellIn -= 1;
+
+    if (item.sellIn < 0) {
+      item.quality = 0;
+    }
+  }
+
+  private increaseQuality(item: Item, amount: number) {
+    item.quality = Math.min(50, item.quality + amount);
   }
 }
