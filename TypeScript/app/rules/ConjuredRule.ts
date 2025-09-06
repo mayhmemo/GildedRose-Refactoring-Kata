@@ -1,18 +1,13 @@
-import { IUpdateRule } from "@/core/IUpdateRule";
+import { RuleBase } from "@/core";
 import { Item } from "@/domain/Item";
 
-export class ConjuredRule implements IUpdateRule {
+export class ConjuredRule extends RuleBase {
   update(item: Item) {
     this.decreaseQuality(item, 2);
-
-    item.sellIn -= 1;
+    this.tickSellIn(item, 1);
 
     if (item.sellIn < 0) {
       this.decreaseQuality(item, 2);
     }
-  }
-
-  private decreaseQuality(item: Item, amount: number) {
-    item.quality = Math.max(0, item.quality - amount);
   }
 }

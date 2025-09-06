@@ -1,7 +1,7 @@
-import { IUpdateRule } from "@/core/IUpdateRule";
+import { RuleBase } from "@/core";
 import { Item } from "@/domain/Item";
 
-export class BackstageRule implements IUpdateRule {
+export class BackstageRule extends RuleBase {
   update(item: Item) {
     this.increaseQuality(item, 1);
 
@@ -12,14 +12,10 @@ export class BackstageRule implements IUpdateRule {
       this.increaseQuality(item, 1);
     }
 
-    item.sellIn -= 1;
+    this.tickSellIn(item, 1);
 
     if (item.sellIn < 0) {
       item.quality = 0;
     }
-  }
-
-  private increaseQuality(item: Item, amount: number) {
-    item.quality = Math.min(50, item.quality + amount);
   }
 }
