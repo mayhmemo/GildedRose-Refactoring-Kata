@@ -1,7 +1,6 @@
 import { IUpdateRule } from "@/core/IUpdateRule";
 import { Item } from "@/domain/Item";
-import { AgedBrieRule, BackstageRule, NormalRule, SulfurasRule } from "@/rules";
-import { ConjuredRule } from "@/rules/ConjuredRule";
+import { AgedBrieRule, BackstageRule, NormalRule, SulfurasRule, ConjuredRule } from "@/rules";
 
 export class RuleFactory {
   static for(item: Item): IUpdateRule {
