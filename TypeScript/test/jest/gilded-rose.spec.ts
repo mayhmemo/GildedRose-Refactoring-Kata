@@ -112,4 +112,27 @@ describe('Gilded Rose — characterization', () => {
       expect(rose.items[0].quality).toBe(80);
     });
   });
+
+  
+  describe('Conjured', () => {
+    it('decreases quality by -2 per day before the expiration', () => {
+      const rose = new GildedRose([new Item('Conjured', 3, 10)]);
+      rose.updateQuality();
+      expect(rose.items[0].sellIn).toBe(2);
+      expect(rose.items[0].quality).toBe(8);
+    });
+
+    it('decreases quality by -4 per day before the expiration', () => {
+      const rose = new GildedRose([new Item('Conjured', 0, 10)]);
+      rose.updateQuality();
+      expect(rose.items[0].sellIn).toBe(-1);
+      expect(rose.items[0].quality).toBe(6);
+    });
+
+    it('quality never becomes negative', () => {
+      const rose = new GildedRose([new Item('Conjured', 1, 1)]);
+      rose.updateQuality();
+      expect(rose.items[0].quality).toBe(0);
+    });
+  });
 });
